@@ -11,7 +11,7 @@ links:
     url:          /about
   - name:         Blog
     url:          /
-    external:     true
+    external:     false
   - name:         Email
     url:          mailto:hjxwho@gmail.com
     external:     true

@@ -1,0 +1,57 @@
+---
+layout: post
+title: "SSH笔记"
+date: 2013-11-03 14:01
+comments: true
+categories:
+- ssh
+---
+##SSH生成密钥
+```
+ssh-keygen -t rsa
+```
+然后，系统会询问你生成密钥的地址，这个时候直接输入名字就会在当前目录下生成对应
+名字的key.
+
+##存放key
+* 公钥
+如果是在本地计算机生成的，可以利用scp命令上传到对应的服务器，然后
+
+	```
+	cd ~/.ssh
+	cat id_rsa.pub >> authorized_keys
+	chmod 600 authorized_keys
+	```
+* 私钥
+ssh生成的key是存放在~/.ssh里面的(没有就新建一个)
+
+##ssh配置文件 config(私钥存放)
+在之前生成的key的时候，key有一个默认的名字叫"id_rsa" and "id_rsa.pub"
+如果是只使用一个key对的话，就不需要用配置文件，但是假如你有多个key的话，就需要
+设置一下对应关系。
+
+* 打开config文件(没有就新建一个)
+* 格式为
+
+	```
+Host 名称(random name)
+    	HostName 主机名(IP address. e.x.: 13*.**.***.***)
+    	User 登录的用户名
+    	IdentityFile 证书文件的路径
+	```
+* Example
+
+	```
+Host firstRemote
+    HostName 103.31.20.64
+    User user1
+    IdentityFile ~/.ssh/CSCI-SSHKEY
+```
+In this case, you can ssh your remote machine by doing
+
+		ssh firstRemote 
+
+	in terminal.
+
+* 公钥在前面的存放里已经有提及多个的存放(貌似是会遍历authorized_keys里面的每一个
+key来匹配)
