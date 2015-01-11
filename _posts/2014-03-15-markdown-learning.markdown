@@ -4,6 +4,7 @@ title: "markdown-learning"
 date: 2014-03-15 15:42:51 -0400
 published: true
 comments: true
+disqus: y
 categories: Markdown
 ---
 
